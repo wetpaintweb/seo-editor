@@ -1,0 +1,115 @@
+/*
+ * Main page wrapper
+ */
+div.SEO_Editor_table_page {}
+
+/*
+ * Table Styles
+ */
+table.seoentries {}
+
+	thead {}
+
+		#title {}
+
+		#keyword {}
+
+		#meta {}
+
+		#seo_notes {}
+
+	tbody {}
+
+		tr {}
+
+			td {}
+
+			td.title {}
+			td.keyword {}
+			td.meta {}
+			td.seo_notes {}
+
+	tfoot{}
+
+/*
+ * Page Meta Styles
+ */
+.seom-title,
+.seom-path,
+.seom-desc {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.seom-title {
+	font-size: 18px;
+	color: #1e0fbe;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+	.seom-title:focus {
+		overflow: scroll;
+		text-overflow: inherit;
+	}
+
+.seom-path {
+	font-size: 13px;
+	color: #006621;
+}
+
+.seom-desc {
+	font-size: 13px;
+	color: #545454;
+	line-height: 18px;
+}
+
+/*
+ * Placeholder Styles
+ */
+.is_placeholder {
+	opacity: .3;
+	font-style: italic;
+}
+
+/*
+ * Page Meta Length Styles
+ */
+.good_length {
+	color: #00AA00;
+}
+
+.too_short {
+	color: #AA0000;
+}
+
+.too_long {
+	color: #AA0000;
+}
+
+/*
+* Button styles for Options Checkboxes
+*/
+.checkbox-button {}
+
+.checkbox-button label span {
+    text-align:center;
+    padding:.2em .5em;
+    display:block;
+}
+
+	.checkbox-button input[type="checkbox"] {
+		display: none;
+	}
+
+.checkbox-button input[type="checkbox"] + div i {
+	line-height: 26px;
+}
+
+	.checkbox-button input[type="checkbox"]:checked + div {
+	    background-color:#EFEFEF;
+	}
+	
+		.checkbox-button input[type="checkbox"]:checked + div i {
+			color: green;
+		}
