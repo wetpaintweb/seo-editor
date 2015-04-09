@@ -149,10 +149,10 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 			}
 
 			// Check if there is any SEO for the term in the array from SEO Editor
-			if ( isset( $taxonomies_SEO_Editor[$tax_term->taxonomy] ) && isset( $taxonomies_SEO_Editor[$tax_term->taxonomy][$tax_term->term_id] ) ) {
+			if ( isset( $taxonomies_seo_editor[$tax_term->taxonomy] ) && isset( $taxonomies_seo_editor[$tax_term->taxonomy][$tax_term->term_id] ) ) {
 
 				// Collect the SEO for this term from the array from WordPress SEO
-				$tax_term_seo = $taxonomies_SEO_Editor[$tax_term->taxonomy][$tax_term->term_id];
+				$tax_term_seo = $taxonomies_seo_editor[$tax_term->taxonomy][$tax_term->term_id];
 
 				// If the reviewed is set for the term add it to the object
 				if ( isset( $tax_term_seo['reviewed'] ) ) {
