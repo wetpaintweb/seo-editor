@@ -1,5 +1,7 @@
 # SEO Editor #
 
+Available in the WordPress.org plugin repository at https://wordpress.org/plugins/seo-editor/
+
 ## Description ##
 
 Save time editing SEO data on multiple pages by using a single editor that pulls in meta title, description, and keyword into a single view. This plugin fully integrates with WordPress SEO and All In One SEO Pack plugins by auto-detecting what plugin you’re using.
