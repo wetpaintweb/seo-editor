@@ -16,9 +16,9 @@ fi
 echo "Releasing version ${version}"
 
 echo "Setting version number in readme.txt and php files"
-sed -i "s/Stable tag: .*/Stable tag: ${version}/" readme.txt
-sed -i "s/Version:           .*/Version:           ${version}/" ${package}.php
-sed -i "s/this->version = '.*';/this->version = '${version}';/" includes/class-${package}.php
+sed -i'' -e "s/Stable tag: .*/Stable tag: ${version}/" readme.txt
+sed -i'' -e "s/Version:           .*/Version:           ${version}/" ${package}.php
+sed -i'' -e "s/this->version = '.*';/this->version = '${version}';/" includes/class-${package}.php
 
 if ([[ $(git st | grep readme.txt) ]] || [[ $(git st | grep ${package}.php) ]]); then
 	echo "Committing changes"
