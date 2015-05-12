@@ -716,7 +716,7 @@ class SEO_Editor_Admin {
 			// Yoast WordPress SEO
 			return array(
 				'title' => '_yoast_wpseo_title',
-				'metadesc' => '_yoast_wpseo_desc',
+				'metadesc' => '_yoast_wpseo_metadesc',
 				'focuskw' => '_yoast_wpseo_focuskw',
 				'canonical' => '_yoast_wpseo_canonical',
 				'user_support' => true,
