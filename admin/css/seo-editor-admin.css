@@ -1,7 +1,7 @@
 /*
  * Main page wrapper
  */
-div.SEO_Editor_table_page {}
+div.seo_editor_table_page {}
 
 /*
  * Table Styles
@@ -109,7 +109,7 @@ table.seoentries {}
 	.checkbox-button input[type="checkbox"]:checked + div {
 	    background-color:#EFEFEF;
 	}
-	
+
 		.checkbox-button input[type="checkbox"]:checked + div i {
 			color: green;
 		}

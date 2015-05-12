@@ -354,7 +354,7 @@ class SEO_Editor_Admin {
 
 	?>
 
-		<div class="wrap SEO_Editor_table_page">
+		<div class="wrap seo_editor_table_page">
 			<div id="icon-edit-pages" class="icon32 icon32-posts-page"></div>
 			<h2>SEO Editor</h2>
 
