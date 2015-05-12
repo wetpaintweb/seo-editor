@@ -43,6 +43,7 @@ The standard version of All in One SEO Pack does not support this functionality.
 
 = 1.0.1 =
 * Bugfix for Save Changes
+* Fix issue with saving of WordPress SEO Meta Description
 
 = 1.0 =
 * Initial Release
