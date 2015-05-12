@@ -41,8 +41,8 @@ rsync -rv --delete --exclude=".git" --exclude=".svn" --exclude="release.sh" --ex
 
 cd /tmp/release-${package}/
 # Add and delete new/old files.
-svn status | grep "^!" | awk '{print $2"@"}' | tr \\n \\0 | xargs -0 svn delete
-svn status | grep "^?" | awk '{print $2"@"}' | tr \\n \\0 | xargs -0 svn add
+svn status | grep "^!" | awk '{print $2"@"}' | tr \\n \\0 | xargs -0 svn delete || true
+svn status | grep "^?" | awk '{print $2"@"}' | tr \\n \\0 | xargs -0 svn add || true
 
 echo "Commiting version ${version} to Wordpress SVN"
 svn commit --username ${wordpressuser} -m"Releasing version ${version}" /tmp/release-${package}
