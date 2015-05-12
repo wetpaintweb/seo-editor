@@ -41,5 +41,8 @@ The standard version of All in One SEO Pack does not support this functionality.
 
 == Changelog ==
 
+= 1.0.1 =
+* Bugfix for Save Changes
+
 = 1.0 =
 * Initial Release

@@ -65,10 +65,10 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 	 * Generate the table navigation above or below the table
 	 *
 	 * @since 3.1.0
-	 * @access protected
+	 * @access public
 	 */
 
-	protected function display_save_button() {
+	public function display_save_button() {
 
 		echo '<a class="button-primary seom-save alignright" href="#save-changes" accesskey="s">' . __('Save Changes') . '</a>';
 
