@@ -329,19 +329,19 @@ class SEO_Editor_Admin {
 		if ( isset( $taxonomies ) && in_array( $content_type, $taxonomies ) ) {
 			if ( !class_exists( 'SEO_Editor_Taxonomy_Editor' ) ) {
 				require_once(  plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-seo-editor-taxonomy-editor.php' );
-				$SEO_Editor_list_table = new SEO_Editor_Taxonomy_Editor( $content_type );
+				$seo_editor_list_table = new SEO_Editor_Taxonomy_Editor( $content_type );
 			}
 		}
 		elseif ( isset( $user ) && in_array( $content_type, $user ) ) {
 			if ( !class_exists( 'SEO_Editor_User_Editor' ) ) {
 				require_once(  plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-seo-editor-user-editor.php' );
-				$SEO_Editor_list_table = new SEO_Editor_User_Editor( $content_type );
+				$seo_editor_list_table = new SEO_Editor_User_Editor( $content_type );
 			}
 		}
 		else {
 			if ( ! class_exists( 'SEO_Editor_Post_Editor' ) ) {
 				require_once(  plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-seo-editor-post-editor.php' );
-				$SEO_Editor_list_table = new SEO_Editor_Post_Editor( $content_type );
+				$seo_editor_list_table = new SEO_Editor_Post_Editor( $content_type );
 			}
 		}
 
@@ -350,7 +350,7 @@ class SEO_Editor_Admin {
 			exit;
 		}
 
-		$SEO_Editor_list_table->prepare_items();
+		$seo_editor_list_table->prepare_items();
 
 	?>
 
@@ -376,9 +376,9 @@ class SEO_Editor_Admin {
 
 			<?php $this->export_button(); ?>
 
-			<?php $SEO_Editor_list_table->display_save_button(); ?>
+			<?php $seo_editor_list_table->display_save_button(); ?>
 
-			<?php $SEO_Editor_list_table->display(); ?>
+			<?php $seo_editor_list_table->display(); ?>
 
 			<div id="ajax-response"></div>
 			<br class="clear" />
