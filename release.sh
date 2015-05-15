@@ -24,6 +24,7 @@ if ([[ $(git status | grep readme.txt) ]] || [[ $(git status | grep ${package}.p
 	echo "Committing changes"
 	git add readme.txt
 	git add ${package}.php
+	git add includes/class-${package}.php
 	git commit -m"Update readme with new stable tag $version"
 fi
 
