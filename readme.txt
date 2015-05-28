@@ -1,6 +1,6 @@
 === SEO Editor ===
 Contributors: wetpaintweb
-Donate link: http://www.wetpaintwebtools.com/
+Donate link: http://www.wetpaintwebtools.com/wetpaint-inline-seo-editor/
 Tags: seo, seo editor, seo bulk editor
 Requires at least: 4.0
 Tested up to: 4.2.2
