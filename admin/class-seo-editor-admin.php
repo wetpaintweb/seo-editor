@@ -190,21 +190,22 @@ class SEO_Editor_Admin {
 		global $submenu;
 
 		// Reorder Yoast SEO menu items
-		if ( isset($submenu['wpseo_dashboard'])) {
+		if ( isset( $submenu['wpseo_dashboard'] ) ) {
 			$arr = array();
 
 			// Version 2.0 of WordPress SEO moved the editor inside of the Tools submenu.
 			if ( floatval( WPSEO_VERSION ) < 2 ) {
 				$submenu_re_index = array( 0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 10 );
-				foreach ( $submenu_re_index as $re_index ) {
-					$arr[] = $submenu['wpseo_dashboard'][$re_index];
-				}
+			}
+			elseif ( floatval( WPSEO_VERSION ) < 2.3 ) {
+				$submenu_re_index = array( 0, 1, 2, 3, 4, 5, 7, 6 );
 			}
 			else {
-				$submenu_re_index = array( 0, 1, 2, 3, 4, 5, 7, 6 );
-				foreach ( $submenu_re_index as $re_index ) {
-					$arr[] = $submenu['wpseo_dashboard'][$re_index];
-				}
+				$submenu_re_index = array( 0, 1, 2, 3, 4, 5, 6, 8, 7 );
+			}
+
+			foreach ( $submenu_re_index as $re_index ) {
+				$arr[] = $submenu['wpseo_dashboard'][$re_index];
 			}
 
 			$submenu['wpseo_dashboard'] = $arr;
