@@ -7,7 +7,7 @@ wordpressuser="wetpaintweb"
 
 version=$1
 
-package=$(basename $(pwd))
+package="seo-editor"
 if [[ ! $version ]]; then
 	echo "Needs a version number as argument"
 	exit 1
