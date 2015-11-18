@@ -190,25 +190,19 @@ class SEO_Editor_Admin {
 		global $submenu;
 
 		// Reorder Yoast SEO menu items
-		if ( isset( $submenu['wpseo_dashboard'] ) ) {
-			$arr = array();
+		if ( isset($submenu['wpseo_dashboard'])) {
+			$total_items = count( $submenu['wpseo_dashboard'] );
+			
+			$new_menu = $submenu['wpseo_dashboard'];
+			
+			// 2nd to last item becomes last item
+			$new_menu[$total_items - 2] = $submenu['wpseo_dashboard'][$total_items - 1];
 
-			// Version 2.0 of WordPress SEO moved the editor inside of the Tools submenu.
-			if ( floatval( WPSEO_VERSION ) < 2 ) {
-				$submenu_re_index = array( 0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 10 );
-			}
-			elseif ( floatval( WPSEO_VERSION ) < 2.3 ) {
-				$submenu_re_index = array( 0, 1, 2, 3, 4, 5, 7, 6 );
-			}
-			else {
-				$submenu_re_index = array( 0, 1, 2, 3, 4, 5, 6, 8, 7 );
-			}
+			// last item becoms second to last item
+			$new_menu[$total_items - 1] = $submenu['wpseo_dashboard'][$total_items - 2];
+			
+			$submenu['wpseo_dashboard'] = $new_menu;
 
-			foreach ( $submenu_re_index as $re_index ) {
-				$arr[] = $submenu['wpseo_dashboard'][$re_index];
-			}
-
-			$submenu['wpseo_dashboard'] = $arr;
 		}
 		return $menu_order;
 	}
