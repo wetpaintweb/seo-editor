@@ -4,10 +4,11 @@ set -e
 
 # Wordpress.org username
 wordpressuser="wetpaintweb"
+# Wordpress.org plugin slug
+package="seo-editor"
 
 version=$1
 
-package="seo-editor"
 if [[ ! $version ]]; then
 	echo "Needs a version number as argument"
 	exit 1
@@ -38,7 +39,7 @@ echo "Checking out current version on Wordpress SVN"
 svn co https://plugins.svn.wordpress.org/${package}/trunk /tmp/release-${package}
 
 echo "Copying in updated files"
-rsync -rv --delete --exclude=".git" --exclude=".svn" --exclude="release.sh" --exclude="README.md" . /tmp/release-${package}/.
+rsync -rv --delete --exclude=".git" --exclude=".svn" --exclude="release.sh" --exclude="deploy-readme.sh" --exclude="README.md" . /tmp/release-${package}/.
 
 cd /tmp/release-${package}/
 # Add and delete new/old files.
