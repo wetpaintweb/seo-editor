@@ -192,15 +192,15 @@ class SEO_Editor_Admin {
 		// Reorder Yoast SEO menu items
 		if ( isset($submenu['wpseo_dashboard'])) {
 			$total_items = count( $submenu['wpseo_dashboard'] );
-			
+
 			$new_menu = $submenu['wpseo_dashboard'];
-			
+
 			// 2nd to last item becomes last item
 			$new_menu[$total_items - 2] = $submenu['wpseo_dashboard'][$total_items - 1];
 
 			// last item becoms second to last item
 			$new_menu[$total_items - 1] = $submenu['wpseo_dashboard'][$total_items - 2];
-			
+
 			$submenu['wpseo_dashboard'] = $new_menu;
 
 		}
@@ -662,19 +662,33 @@ class SEO_Editor_Admin {
 				$taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
 
 				// Get all taxonomy terms SEO data - returns an unserialized array of all the taxonomies SEO
-				$taxonomies_seo = get_option('wpseo_taxonomy_meta');
-				$taxonomies_seo_editor = get_option('seo_editor_taxonomy_meta');
+				$taxonomies_seo = get_option( 'wpseo_taxonomy_meta' );
+				$taxonomies_seo_editor = get_option( 'seo_editor_taxonomy_meta' );
 
 				foreach ( $taxonomies as $taxonomy ) {
 
 					// Get all taxonomy terms
 					$tax_terms = get_terms( $taxonomy->name );
 
-					foreach ($tax_terms as $term) {
+					foreach ( $tax_terms as $term ) {
 
-						$tax_term_seo = $taxonomies_seo[$taxonomy->name][$term->term_id];
+						if ( isset( $taxonomies_seo[ $taxonomy->name ] ) && isset( $taxonomies_seo[ $taxonomy->name ][ $term->term_id ] ) ) {
+							$tax_term_seo = $taxonomies_seo[ $taxonomy->name ][ $term->term_id ];
+						}
+						else {
+							$tax_term_seo = array(
+								'wpseo_canonical' => '',
+								'wpseo_title' => '',
+								'wpseo_desc' => ''
+							);
+						}
 
-						$tax_term_seo_editor = $taxonomies_seo_editor[$taxonomy->name][$term->term_id];
+						if ( isset( $taxonomies_seo_editor[ $taxonomy->name ] ) && isset( $taxonomies_seo_editor[ $taxonomy->name ][ $term->term_id ] ) ) {
+							$tax_term_seo_editor = $taxonomies_seo_editor[ $taxonomy->name ][ $term->term_id ];
+						}
+						else {
+							$tax_term_seo_editor = array( 'notes' => '' );
+						}
 
 						fputcsv($out, array(
 							$term->name, //~ 'Name',
