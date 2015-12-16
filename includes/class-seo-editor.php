@@ -55,7 +55,7 @@ class SEO_Editor {
 	public function __construct() {
 
 		$this->plugin_name = 'seo-editor';
-		$this->version = '1.0.3';
+		$this->version = '1.0.4';
 
 		$this->load_dependencies();
 		$this->set_locale();
