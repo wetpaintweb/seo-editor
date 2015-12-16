@@ -3,7 +3,7 @@ Contributors: wetpaintweb
 Donate link: http://www.wetpaintwebtools.com/wetpaint-inline-seo-editor/
 Tags: seo, seo editor, seo bulk editor
 Requires at least: 4.0
-Tested up to: 4.3.1
+Tested up to: 4.4
 Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -40,6 +40,10 @@ The standard version of All in One SEO Pack does not support this functionality.
 2. Close-up on the content type selector.
 
 == Changelog ==
+
+= 1.0.4 =
+* Fixed minor PHP notice
+* Fix default sort order for Users
 
 = 1.0.3 =
 * Updated menu ordering for compatibility with Yoast SEO 3+

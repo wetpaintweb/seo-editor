@@ -776,7 +776,8 @@ class SEO_Editor_Admin {
 		$valid_column_names = array(
 			'post_title',
 			'seo_kw',
-			'display_name'
+			'display_name',
+			'user_registered, display_name'
 		);
 
 		if ( in_array( $orderby, $valid_column_names ) ) {
