@@ -289,8 +289,8 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 					<td <?php echo $attributes; ?>>
 
-						<div id="seom-keyword-<?php echo $row->term_id; ?>" name="seom-keyword-<?php echo $row->term_id; ?>" class="seom-keyword editable" data-type="keyword" data-value="<?php echo esc_attr( $row->seo_kw ); ?>" data-placeholder="<?php _e( 'Enter a Target Keyword' ); ?>">
-							<?php echo esc_textarea( $row->seo_kw ); ?>
+						<div id="seom-keyword-<?php echo $row->term_id; ?>" name="seom-keyword-<?php echo $row->term_id; ?>" class="seom-keyword editable" data-type="keyword" data-value="<?php echo esc_attr( html_entity_decode( $row->seo_kw ) ); ?>" data-placeholder="<?php _e( 'Enter a Target Keyword' ); ?>">
+							<?php echo esc_textarea( html_entity_decode( $row->seo_kw ) ); ?>
 						</div>
 
 					</td>
@@ -301,8 +301,8 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 					<td <?php echo $attributes; ?>>
 
-						<div id="seom-title-<?php echo $row->term_id; ?>" name="seom-title-<?php echo $row->term_id; ?>" class="seom-title editable" data-type="title" data-value="<?php echo esc_attr( $row->wpseo_title ); ?>" data-placeholder="<?php _e( 'Enter a Page Title' ); ?>">
-							<?php echo esc_textarea( $row->wpseo_title ); ?>
+						<div id="seom-title-<?php echo $row->term_id; ?>" name="seom-title-<?php echo $row->term_id; ?>" class="seom-title editable" data-type="title" data-value="<?php echo esc_attr( html_entity_decode( $row->wpseo_title ) ); ?>" data-placeholder="<?php _e( 'Enter a Page Title' ); ?>">
+							<?php echo esc_textarea( html_entity_decode( $row->wpseo_title ) ); ?>
 						</div>
 
 						<div class="seom-path">
@@ -313,8 +313,8 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 						</div>
 
-						<div id="seom-desc-<?php echo $row->term_id; ?>" name="seom-desc-<?php echo $row->term_id; ?>" class="seom-desc editable" data-type="desc" data-value="<?php echo esc_attr( $row->wpseo_desc ); ?>" data-placeholder="<?php _e( 'Enter a Meta Description' ); ?>">
-							<?php echo esc_textarea( $row->wpseo_desc ); ?>
+						<div id="seom-desc-<?php echo $row->term_id; ?>" name="seom-desc-<?php echo $row->term_id; ?>" class="seom-desc editable" data-type="desc" data-value="<?php echo esc_attr( html_entity_decode( $row->wpseo_desc ) ); ?>" data-placeholder="<?php _e( 'Enter a Meta Description' ); ?>">
+							<?php echo esc_textarea( html_entity_decode( $row->wpseo_desc ) ); ?>
 						</div>
 
 						<span class="title-length" title="Calculating Title Length">?</span> / <span class="desc-length" title="Calculating Description Length">?</span>
@@ -327,8 +327,8 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 					<td <?php echo $attributes; ?>>
 
-						<div id="seom-notes-<?php echo $row->term_id; ?>" name="seom-notes-<?php echo $row->term_id; ?>" class="seom-notes editable" data-type="seo_notes" data-value="<?php echo esc_attr( $row->seo_notes ); ?>" data-placeholder="<?php _e( 'Add a note or comment' ); ?>">
-							<?php echo esc_textarea( $row->seo_notes ); ?>
+						<div id="seom-notes-<?php echo $row->term_id; ?>" name="seom-notes-<?php echo $row->term_id; ?>" class="seom-notes editable" data-type="seo_notes" data-value="<?php echo esc_attr( html_entity_decode( $row->seo_notes ) ); ?>" data-placeholder="<?php _e( 'Add a note or comment' ); ?>">
+							<?php echo esc_textarea( html_entity_decode( $row->seo_notes ) ); ?>
 						</div>
 
 					</td>

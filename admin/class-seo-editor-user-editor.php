@@ -252,7 +252,7 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 					<td <?php echo $attributes; ?>>
 
 						<div id="seom-title-<?php echo $row->ID; ?>" name="seom-title-<?php echo $row->ID; ?>" class="seom-title editable" data-type="title" data-id="<?php echo $row->ID; ?>" data-placeholder="<?php _e( 'Enter a Page Title' ); ?>">
-							<?php echo esc_textarea( $row->seo_title ); ?>
+							<?php echo esc_textarea( html_entity_decode( $row->seo_title ) ); ?>
 						</div>
 
 						<div class="seom-path">
@@ -260,7 +260,7 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 						</div>
 
 						<div id="seom-desc-<?php echo $row->ID; ?>" name="seom-desc-<?php echo $row->ID; ?>" class="seom-desc editable" data-type="desc" data-id="<?php echo $row->ID; ?>" data-placeholder="<?php _e( 'Enter a Meta Description' ); ?>">
-							<?php echo esc_textarea( $row->seo_desc ); ?>
+							<?php echo esc_textarea( html_entity_decode( $row->seo_desc ) ); ?>
 						</div>
 
 						<span class="title-length" title="Calculating Title Length">?</span> / <span class="desc-length" title="Calculating Description Length">?</span>
@@ -274,7 +274,7 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 					<td <?php echo $attributes; ?>>
 
 						<div id="seom-notes-<?php echo $row->ID; ?>" name="seom-notes-<?php echo $row->ID; ?>" class="seom-notes editable" data-type="seo_notes" data-placeholder="<?php _e( 'Add a note or comment' ); ?>">
-							<?php echo esc_textarea( $row->seo_notes ); ?>
+							<?php echo esc_textarea( html_entity_decode( $row->seo_notes ) ); ?>
 						</div>
 
 					</td>
