@@ -105,7 +105,7 @@ jQuery(function($){
 		$.each(seom_changes, function(index, data) {
 			if(typeof data !== "undefined") {
 				if(data.section == content_section && data.type == content_type && data.id == content_id && data.field == entry_type) {
-					delete seom_changes[index];
+					seom_changes.splice( index, 1 );
 				}
 				else if(data.section == content_section && data.type == content_type && data.id == content_id) {
 					other_fields++;
