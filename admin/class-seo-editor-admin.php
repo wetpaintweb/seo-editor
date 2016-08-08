@@ -617,10 +617,10 @@ class SEO_Editor_Admin {
 					get_post_status_object( $item->status )->label, //~ 'Post Status',
 					get_permalink( $item->ID ), //~ 'URL',
 					$item->seo_canonical, //~ 'Canonical Link'
-					$item->seo_kw, //~ 'Focus Keyword',
-					$item->seo_title, //~ 'Title',
-					$item->seo_desc, //~ 'Meta Description'
-					$item->seo_notes //~ 'Comments'
+					html_entity_decode( $item->seo_kw ), //~ 'Focus Keyword',
+					html_entity_decode( $item->seo_title ), //~ 'Title',
+					html_entity_decode( $item->seo_desc ), //~ 'Meta Description'
+					html_entity_decode( $item->seo_notes ) //~ 'Comments'
 				));
 			}
 
@@ -650,9 +650,9 @@ class SEO_Editor_Admin {
 						get_author_posts_url( $item->ID ), //~ 'URL',
 						'n/a for this content', //~ 'Canonical Link' not available
 						'n/a for this content', //~ 'Focus Keyword', not available
-						$item->seo_title, //~ 'Title',
-						$item->seo_desc, //~ 'Meta Description'
-						$item->seo_notes //~ 'Comments'
+						html_entity_decode( $item->seo_title ), //~ 'Title',
+						html_entity_decode( $item->seo_desc ), //~ 'Meta Description'
+						html_entity_decode( $item->seo_notes ) //~ 'Comments'
 					));
 				}
 			}
@@ -695,11 +695,11 @@ class SEO_Editor_Admin {
 							$taxonomy->labels->name, //~ 'Type',
 							'', //~ 'Status',
 							get_term_link( $term ), //~ 'URL',
-							$tax_term_seo['wpseo_canonical'], //~ 'Canonical Link' not available
+							isset( $tax_term_seo['wpseo_canonical'] ) ? $tax_term_seo['wpseo_canonical'] : '', //~ 'Canonical Link' not available
 							'n/a for this content', //~ 'Focus Keyword', not available
-							$tax_term_seo['wpseo_title'], //~ 'Title',
-							$tax_term_seo['wpseo_desc'], //~ 'Meta Description'
-							$tax_term_seo_editor['notes'] //~ 'Comments'
+							html_entity_decode( $tax_term_seo['wpseo_title'] ), //~ 'Title',
+							html_entity_decode( $tax_term_seo['wpseo_desc'] ), //~ 'Meta Description'
+							html_entity_decode( $tax_term_seo_editor['notes'] ) //~ 'Comments'
 						));
 					}
 				}
