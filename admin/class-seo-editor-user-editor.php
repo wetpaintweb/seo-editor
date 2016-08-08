@@ -251,7 +251,7 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 
 					<td <?php echo $attributes; ?>>
 
-						<div id="seom-title-<?php echo $row->ID; ?>" name="seom-title-<?php echo $row->ID; ?>" class="seom-title editable" data-type="title" data-id="<?php echo $row->ID; ?>" data-placeholder="<?php _e( 'Enter a Page Title' ); ?>">
+						<div id="seom-title-<?php echo $row->ID; ?>" name="seom-title-<?php echo $row->ID; ?>" class="seom-title editable" data-type="title" data-value="<?php echo esc_attr( html_entity_decode( $row->wpseo_title ) ); ?>" data-id="<?php echo $row->ID; ?>" data-placeholder="<?php _e( 'Enter a Page Title' ); ?>">
 							<?php echo esc_textarea( html_entity_decode( $row->seo_title ) ); ?>
 						</div>
 
@@ -259,7 +259,7 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 							<span id="seom-slug-<?php echo $row->ID; ?>" name="seom-slug-<?php echo $row->ID; ?>" type="text" class="seom-slug" data-type="slug"><?php echo str_replace(get_site_url(), '', get_author_posts_url( $row->ID )); ?></span>
 						</div>
 
-						<div id="seom-desc-<?php echo $row->ID; ?>" name="seom-desc-<?php echo $row->ID; ?>" class="seom-desc editable" data-type="desc" data-id="<?php echo $row->ID; ?>" data-placeholder="<?php _e( 'Enter a Meta Description' ); ?>">
+						<div id="seom-desc-<?php echo $row->ID; ?>" name="seom-desc-<?php echo $row->ID; ?>" class="seom-desc editable" data-type="desc" data-value="<?php echo esc_attr( html_entity_decode( $row->wpseo_desc ) ); ?>" data-id="<?php echo $row->ID; ?>" data-placeholder="<?php _e( 'Enter a Meta Description' ); ?>">
 							<?php echo esc_textarea( html_entity_decode( $row->seo_desc ) ); ?>
 						</div>
 
@@ -273,7 +273,7 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 
 					<td <?php echo $attributes; ?>>
 
-						<div id="seom-notes-<?php echo $row->ID; ?>" name="seom-notes-<?php echo $row->ID; ?>" class="seom-notes editable" data-type="seo_notes" data-placeholder="<?php _e( 'Add a note or comment' ); ?>">
+						<div id="seom-notes-<?php echo $row->ID; ?>" name="seom-notes-<?php echo $row->ID; ?>" class="seom-notes editable" data-type="seo_notes" data-value="<?php echo esc_attr( html_entity_decode( $row->seo_notes ) ); ?>" data-placeholder="<?php _e( 'Add a note or comment' ); ?>">
 							<?php echo esc_textarea( html_entity_decode( $row->seo_notes ) ); ?>
 						</div>
 
