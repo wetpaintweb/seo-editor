@@ -50,7 +50,7 @@ The standard version of All in One SEO Pack does not support this functionality.
 == Changelog ==
 
 = 1.0.7 =
-* Fixed pagination for taxonomies
+* Added support for Yoast SEO Premium
 
 = 1.0.6 =
 * Fixed pagination for taxonomies
