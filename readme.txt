@@ -15,6 +15,14 @@ Edit SEO Data in bulk to save time. Includes meta title, description, and keywor
 
 Save time editing SEO data on multiple pages by using a single editor that pulls in meta title, description, and keyword into a single view. This plugin fully integrates with WordPress SEO and All In One SEO Pack plugins by auto-detecting what plugin you’re using.
 
+= Code =
+
+View the source on [GitHub](https://github.com/wetpaintweb/seo-editor). You can also submit an [issue](https://github.com/wetpaintweb/seo-editor/issues) or pull request for anything new.
+
+= Support =
+
+If you need support with this plugin, please [Contact us on our contact form](https://www.wetpaintwebtools.com/contact-us/)
+
 
 == Installation ==
 
