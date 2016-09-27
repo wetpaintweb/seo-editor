@@ -117,7 +117,7 @@ class SEO_Editor_Admin {
 	 * @since    1.0.0
 	 */
 	public function activation_notice() {
-		if ( ! is_plugin_active( 'wordpress-seo/wp-seo.php' ) && ! is_plugin_active( 'all-in-one-seo-pack/all_in_one_seo_pack.php' ) ) {
+		if ( ! is_plugin_active( 'wordpress-seo/wp-seo.php' ) && ! is_plugin_active( 'all-in-one-seo-pack/all_in_one_seo_pack.php' ) && ! is_plugin_active( 'wordpress-seo-premium/wp-seo-premium.php' ) ) {
 			$screen = get_current_screen();
 			if ( $screen->id == 'plugins' ) {
 				echo '<div class="error"><p>';
@@ -134,7 +134,7 @@ class SEO_Editor_Admin {
 	 */
 	public function add_pages() {
 
-		if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
+		if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) || is_plugin_active( 'wordpress-seo-premium/wp-seo-premium.php' ) ) {
 			$admin_page = add_submenu_page(
 				'wpseo_dashboard',
 				'Bulk Editor',
