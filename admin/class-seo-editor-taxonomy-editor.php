@@ -182,6 +182,7 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 		if ( !empty( $paged ) && !empty( $per_page ) ) {
 			$offset = ($paged - 1) * $per_page;
+			$tax_terms =  array_slice( $tax_terms, (int) $offset, (int) $per_page );
 		}
 
 		$this->set_pagination_args( array(
