@@ -49,6 +49,9 @@ The standard version of All in One SEO Pack does not support this functionality.
 
 == Changelog ==
 
+= 1.0.6 =
+* Fixed pagination for taxonomies
+
 = 1.0.5 =
 * Fixed issue with displaying international special characters
 * Fixed bug when saving changes multiple times without switching pages
