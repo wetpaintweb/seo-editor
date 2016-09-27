@@ -9,7 +9,7 @@
  * Plugin Name:       SEO Editor
  * Plugin URI:        http://www.wetpaintwebtools.com/product/seo-editor/
  * Description:       Edit SEO data in bulk to save time.
- * Version:           1.0.5
+ * Version:           1.0.6
  * Author:            WetPaint
  * Author URI:        http://www.wetpaintwebtools.com/
  * License:           GPL-2.0+
