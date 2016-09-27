@@ -121,7 +121,7 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 		// Get all taxonomy terms SEO data - returns an unserialized array of all the taxonomies SEO
 		$taxonomies_seo = get_option( 'wpseo_taxonomy_meta' );
-		$taxonomies_SEO_Editor = get_option( 'seo_editor_taxonomy_meta' );
+		$taxonomies_seo_editor = get_option( 'seo_editor_taxonomy_meta' );
 
 		// Loop through taxonomy and add to taxonomy SEO
 		foreach ( $tax_terms as $tax_term ) {
