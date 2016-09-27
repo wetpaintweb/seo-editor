@@ -57,7 +57,6 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 	 */
 	function get_sortable_columns() {
 		return $sortable = array(
-			'title' => array( 'post_title', true )
 		);
 	}
 
