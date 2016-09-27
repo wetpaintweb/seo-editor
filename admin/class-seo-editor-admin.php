@@ -193,15 +193,19 @@ class SEO_Editor_Admin {
 		if ( isset($submenu['wpseo_dashboard'])) {
 			$total_items = count( $submenu['wpseo_dashboard'] );
 
-			$new_menu = $submenu['wpseo_dashboard'];
+			if ( $total_items > 2 ) {
 
-			// 2nd to last item becomes last item
-			$new_menu[$total_items - 2] = $submenu['wpseo_dashboard'][$total_items - 1];
+				$new_menu = $submenu['wpseo_dashboard'];
 
-			// last item becoms second to last item
-			$new_menu[$total_items - 1] = $submenu['wpseo_dashboard'][$total_items - 2];
+				// 2nd to last item becomes last item
+				$new_menu[$total_items - 2] = $submenu['wpseo_dashboard'][$total_items - 1];
 
-			$submenu['wpseo_dashboard'] = $new_menu;
+				// last item becoms second to last item
+				$new_menu[$total_items - 1] = $submenu['wpseo_dashboard'][$total_items - 2];
+
+				$submenu['wpseo_dashboard'] = $new_menu;
+
+			}
 
 		}
 		return $menu_order;
