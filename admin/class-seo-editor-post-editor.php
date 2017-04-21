@@ -308,7 +308,7 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 						<?php // Add the actions below the title
 							$actions = array();
 							$actions['edit'] = '<a href="' . get_edit_post_link( $row->ID, true ) . '" title="' . esc_attr__( 'Edit this item' ) . '">' . __( 'Edit' ) . '</a>';
-							$actions['view'] = '<a href="/?p=' . $row->ID . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $row->title ) ) . '" rel="permalink">' . __( 'View' ) . '</a>';
+							$actions['view'] = '<a href="' . get_permalink($row->ID) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $row->title ) ) . '" rel="permalink">' . __( 'View' ) . '</a>';
 							echo $this->row_actions( $actions );
 						?>
 
