@@ -1,7 +1,7 @@
 <?php
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
-	require_once( plugin_dir_path( dirname( __FILE__ ) ) . '/includes/class-wp-list-table.php' );
+	require_once plugin_dir_path( dirname( __FILE__ ) ) . '/includes/class-wp-list-table.php';
 }
 
 class SEO_Editor_Post_Editor extends WP_List_Table {
@@ -10,11 +10,13 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 
 	function __construct( $content_type = 'page' ) {
 
-		parent::__construct( array(
-			'singular' => 'SEO Entry',
-			'plural' => 'SEO Entries',
-			'ajax' => true
-		) );
+		parent::__construct(
+			array(
+				'singular' => 'SEO Entry',
+				'plural'   => 'SEO Entries',
+				'ajax'     => true,
+			)
+		);
 
 		$this->screen->post_type = $content_type;
 	}
@@ -22,7 +24,7 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 	/**
 	 * Check the current user's permissions.
 	 *
- 	 * @since 1.0.0
+	 * @since 1.0.0
 	 * @access public
 	 */
 	public function ajax_user_can() {
@@ -37,10 +39,10 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 	 */
 	function get_columns() {
 		return $columns = array(
-			'title' => __( 'Title' ),
-			'keyword' => __( 'Keyword' ),
-			'meta' => __( 'Page Meta' ),
-			'seo_notes' => __( 'SEO Notes' )
+			'title'     => __( 'Title' ),
+			'keyword'   => __( 'Keyword' ),
+			'meta'      => __( 'Page Meta' ),
+			'seo_notes' => __( 'SEO Notes' ),
 		);
 	}
 
@@ -51,8 +53,8 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 	 */
 	function get_sortable_columns() {
 		return $sortable = array(
-			'title' => array( 'post_title', true ),
-			'keyword' => array( 'seo_kw', true )
+			'title'   => array( 'post_title', true ),
+			'keyword' => array( 'seo_kw', true ),
 		);
 	}
 
@@ -63,12 +65,12 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 	 * @access protected
 	 */
 	protected function get_views() {
-		$post_type = $this->screen->post_type;
+		$post_type        = $this->screen->post_type;
 		$avail_post_stati = get_available_post_statuses( $post_type );
 
 		$status_links = array();
-		$num_posts = wp_count_posts( $post_type, 'readable' );
-		$class = '';
+		$num_posts    = wp_count_posts( $post_type, 'readable' );
+		$class        = '';
 
 		$current_user_id = get_current_user_id();
 
@@ -79,9 +81,8 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 			$total_posts -= $num_posts->$state;
 		}
 
-		$class = empty( $class ) && empty( $_REQUEST['post_status'] ) && empty( $_REQUEST['show_sticky'] ) ? ' class="current"' : '';
-		$status_links['all'] = '<a href="'. admin_url( 'admin.php?page=' . SEO_Editor_Admin::get_current_page() . "&amp;content_type=$post_type" ) . '"' . $class . '>' . sprintf( _nx( 'All <span class="count">(%s)</span>', 'All <span class="count">(%s)</span>', $total_posts, 'posts' ), number_format_i18n( $total_posts ) ) . '</a>';
-
+		$class               = empty( $class ) && empty( $_REQUEST['post_status'] ) && empty( $_REQUEST['show_sticky'] ) ? ' class="current"' : '';
+		$status_links['all'] = '<a href="' . admin_url( 'admin.php?page=' . SEO_Editor_Admin::get_current_page() . "&amp;content_type=$post_type" ) . '"' . $class . '>' . sprintf( _nx( 'All <span class="count">(%s)</span>', 'All <span class="count">(%s)</span>', $total_posts, 'posts' ), number_format_i18n( $total_posts ) ) . '</a>';
 
 		foreach ( get_post_stati( array( 'show_in_admin_status_list' => true ), 'objects' ) as $status ) {
 			$class = '';
@@ -96,11 +97,11 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 				continue;
 			}
 
-			if ( isset($_REQUEST['post_status']) && $status_name == $_REQUEST['post_status'] ) {
+			if ( isset( $_REQUEST['post_status'] ) && $status_name == $_REQUEST['post_status'] ) {
 				$class = ' class="current"';
 			}
 
-			$status_links[$status_name] = '<a href="'. admin_url( 'admin.php?page=' . SEO_Editor_Admin::get_current_page() . "&amp;post_status=$status_name&amp;content_type=$post_type" ) . '"' . $class . '>' . sprintf( translate_nooped_plural( $status->label_count, $num_posts->$status_name ), number_format_i18n( $num_posts->$status_name ) ) . '</a>';
+			$status_links[ $status_name ] = '<a href="' . admin_url( 'admin.php?page=' . SEO_Editor_Admin::get_current_page() . "&amp;post_status=$status_name&amp;content_type=$post_type" ) . '"' . $class . '>' . sprintf( translate_nooped_plural( $status->label_count, $num_posts->$status_name ), number_format_i18n( $num_posts->$status_name ) ) . '</a>';
 		}
 
 		return $status_links;
@@ -116,7 +117,7 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 
 	public function display_save_button() {
 
-		echo '<a class="button-primary seom-save alignright" href="#save-changes" accesskey="s">' . __('Save Changes') . '</a>';
+		echo '<a class="button-primary seom-save alignright" href="#save-changes" accesskey="s">' . __( 'Save Changes' ) . '</a>';
 
 	}
 
@@ -130,11 +131,11 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 
 		echo '<div class="tablenav ' . esc_attr( $which ) . '">';
 
-			if ( 'top' == $which ){
+		if ( 'top' == $which ) {
 
-				$this->views();
+			$this->views();
 
-			}
+		}
 
 			$this->pagination( $which );
 
@@ -163,10 +164,9 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 		if ( isset( $_REQUEST['post_status'] ) ) {
 			$post_status = esc_sql( $_REQUEST['post_status'] );
 			$post_status = "'$post_status'";
-		}
-		else {
+		} else {
 			$post_statuses = get_post_stati( array( 'show_in_admin_all_list' => true ) );
-			$post_status = "'" . implode( "', '", $post_statuses ) . "'";
+			$post_status   = "'" . implode( "', '", $post_statuses ) . "'";
 		}
 
 		// Query to collect post and SEO data
@@ -200,7 +200,7 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 		$order = ! empty( $order ) ? esc_sql( strtoupper( sanitize_text_field( $order ) ) ) : 'DESC';
 		$order = SEO_Editor_Admin::sanitize_order( $order );
 
-		$query .= ' ORDER BY '.$orderby.' '.$order;
+		$query .= ' ORDER BY ' . $orderby . ' ' . $order;
 
 		// Pagination
 		$total_items = $wpdb->query( $query );
@@ -209,27 +209,29 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 
 		$paged = isset( $_GET['paged'] ) ? esc_sql( $_GET['paged'] ) : '';
 
-		if ( empty( $paged ) || !is_numeric( $paged ) || $paged <= 0 ) {
+		if ( empty( $paged ) || ! is_numeric( $paged ) || $paged <= 0 ) {
 			$paged = 1;
 		}
 
 		$total_pages = ceil( $total_items / $per_page );
 
-		if ( !empty( $paged ) && !empty( $per_page ) ) {
-			$offset = ($paged - 1) * $per_page;
-			$query .= ' LIMIT ' . (int)$offset . ',' . (int)$per_page;
+		if ( ! empty( $paged ) && ! empty( $per_page ) ) {
+			$offset = ( $paged - 1 ) * $per_page;
+			$query .= ' LIMIT ' . (int) $offset . ',' . (int) $per_page;
 		}
 
-		$this->set_pagination_args( array(
-			'total_items' => $total_items,
-			'total_pages' => $total_pages,
-			'per_page' => $per_page
-		) );
+		$this->set_pagination_args(
+			array(
+				'total_items' => $total_items,
+				'total_pages' => $total_pages,
+				'per_page'    => $per_page,
+			)
+		);
 
 		// Set column headers
-		$columns = $this->get_columns();
-		$hidden = array();
-		$sortable = $this->get_sortable_columns();
+		$columns               = $this->get_columns();
+		$hidden                = array();
+		$sortable              = $this->get_sortable_columns();
 		$this->_column_headers = array( $columns, $hidden, $sortable );
 
 		// Set the query results to the objects items
@@ -258,10 +260,10 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 			foreach ( $rows as $row ) {
 
 				$row_count++;
-				$row_class = "hentry row-$row_count";
-				$row_class .= $row_count%2==0 ? ' alternate' : '';
+				$row_class  = "hentry row-$row_count";
+				$row_class .= $row_count % 2 == 0 ? ' alternate' : '';
 
-				echo '<tr id="'.$post_type.'-'.$row->ID.'" data-id="'.$row->ID.'" data-type="'.$post_type.'" data-section="post" class="'.$row_class.'">';
+				echo '<tr id="' . $post_type . '-' . $row->ID . '" data-id="' . $row->ID . '" data-type="' . $post_type . '" data-section="post" class="' . $row_class . '">';
 
 				$this->single_row( $row );
 
@@ -285,7 +287,7 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 		foreach ( $columns as $column_name => $column_display_name ) {
 
 			$class = "class='$column_name'";
-			$style = "";
+			$style = '';
 			if ( in_array( $column_name, $hidden ) ) {
 				$style = ' style="display:none;"';
 			}
@@ -293,7 +295,8 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 
 			switch ( $column_name ) {
 
-				case 'title': ?>
+				case 'title':
+					?>
 
 					<td <?php echo $attributes; ?>>
 
@@ -305,10 +308,11 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 
 						<div class="row-actions">
 
-						<?php // Add the actions below the title
-							$actions = array();
+						<?php
+						// Add the actions below the title
+							$actions         = array();
 							$actions['edit'] = '<a href="' . get_edit_post_link( $row->ID, true ) . '" title="' . esc_attr__( 'Edit this item' ) . '">' . __( 'Edit' ) . '</a>';
-							$actions['view'] = '<a href="' . get_permalink($row->ID) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $row->title ) ) . '" rel="permalink">' . __( 'View' ) . '</a>';
+							$actions['view'] = '<a href="' . get_permalink( $row->ID ) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $row->title ) ) . '" rel="permalink">' . __( 'View' ) . '</a>';
 							echo $this->row_actions( $actions );
 						?>
 
@@ -316,9 +320,11 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 
 					</td>
 
-				<?php break;
+					<?php
+					break;
 
-				case 'keyword': ?>
+				case 'keyword':
+					?>
 
 					<td <?php echo $attributes; ?>>
 
@@ -328,9 +334,11 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 
 					</td>
 
-				<?php break;
+					<?php
+					break;
 
-				case 'meta': ?>
+				case 'meta':
+					?>
 
 					<td <?php echo $attributes; ?>>
 
@@ -352,9 +360,11 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 
 					</td>
 
-				<?php break;
+					<?php
+					break;
 
-				case 'seo_notes': ?>
+				case 'seo_notes':
+					?>
 
 					<td <?php echo $attributes; ?>>
 
@@ -364,7 +374,8 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 
 					</td>
 
-				<?php break;
+					<?php
+					break;
 			}
 		}
 	}
@@ -382,7 +393,7 @@ class SEO_Editor_Post_Editor extends WP_List_Table {
 
 		foreach ( $parents as $parent ) {
 
-			$post = get_post($parent);
+			$post       = get_post( $parent );
 			$slug_path .= trailingslashit( $post->post_name );
 		}
 

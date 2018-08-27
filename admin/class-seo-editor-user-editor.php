@@ -1,7 +1,7 @@
 <?php
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
-	require_once( plugin_dir_path( dirname( __FILE__ ) ) . '/includes/class-wp-list-table.php' );
+	require_once plugin_dir_path( dirname( __FILE__ ) ) . '/includes/class-wp-list-table.php';
 }
 
 class SEO_Editor_User_Editor extends WP_List_Table {
@@ -10,24 +10,25 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 
 	function __construct( $content_type = 'users' ) {
 
-		parent::__construct( array(
-			'singular' => 'SEO Entry',
-			'plural' => 'SEO Entries',
-			'ajax' => true
-		) );
+		parent::__construct(
+			array(
+				'singular' => 'SEO Entry',
+				'plural'   => 'SEO Entries',
+				'ajax'     => true,
+			)
+		);
 	}
 
 	/**
 	 * Check the current user's permissions.
 	 *
- 	 * @since 1.0.0
+	 * @since 1.0.0
 	 * @access public
 	 */
 	public function ajax_user_can() {
 		if ( $this->is_site_users ) {
 			return current_user_can( 'manage_sites' );
-		}
-		else {
+		} else {
 			return current_user_can( 'list_users' );
 		}
 	}
@@ -40,9 +41,9 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 	 */
 	function get_columns() {
 		return $columns = array(
-			'title' => __( 'Display Name' ),
-			'meta' => __( 'Page Meta' ),
-			'seo_notes' => __( 'SEO Notes' )
+			'title'     => __( 'Display Name' ),
+			'meta'      => __( 'Page Meta' ),
+			'seo_notes' => __( 'SEO Notes' ),
 		);
 	}
 
@@ -53,7 +54,7 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 	 */
 	function get_sortable_columns() {
 		return $sortable = array(
-			'title' => array( 'display_name', true )
+			'title' => array( 'display_name', true ),
 		);
 	}
 
@@ -66,7 +67,7 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 
 	public function display_save_button() {
 
-		echo '<a class="button-primary seom-save alignright" href="#save-changes" accesskey="s">' . __('Save Changes') . '</a>';
+		echo '<a class="button-primary seom-save alignright" href="#save-changes" accesskey="s">' . __( 'Save Changes' ) . '</a>';
 
 	}
 
@@ -88,11 +89,11 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 
 		echo '<div class="tablenav ' . esc_attr( $which ) . '">';
 
-			if ( 'top' == $which ) {
+		if ( 'top' == $which ) {
 
-				$this->views();
+			$this->views();
 
-			}
+		}
 
 			$this->pagination( $which );
 
@@ -137,7 +138,7 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 		$order = ! empty( $order ) ? esc_sql( strtoupper( sanitize_text_field( $order ) ) ) : 'DESC';
 		$order = SEO_Editor_Admin::sanitize_order( $order );
 
-		$query .= ' ORDER BY '.$orderby.' '.$order;
+		$query .= ' ORDER BY ' . $orderby . ' ' . $order;
 
 		// Pagination
 		$total_items = $wpdb->query( $query );
@@ -152,21 +153,23 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 
 		$total_pages = ceil( $total_items / $per_page );
 
-		if ( !empty( $paged ) && !empty( $per_page ) ) {
-			$offset = ($paged - 1) * $per_page;
-			$query .= ' LIMIT ' . (int)$offset . ',' . (int)$per_page;
+		if ( ! empty( $paged ) && ! empty( $per_page ) ) {
+			$offset = ( $paged - 1 ) * $per_page;
+			$query .= ' LIMIT ' . (int) $offset . ',' . (int) $per_page;
 		}
 
-		$this->set_pagination_args( array(
-			'total_items' => $total_items,
-			'total_pages' => $total_pages,
-			'per_page' => $per_page
-		) );
+		$this->set_pagination_args(
+			array(
+				'total_items' => $total_items,
+				'total_pages' => $total_pages,
+				'per_page'    => $per_page,
+			)
+		);
 
 		// Set column headers
-		$columns = $this->get_columns();
-		$hidden = array();
-		$sortable = $this->get_sortable_columns();
+		$columns               = $this->get_columns();
+		$hidden                = array();
+		$sortable              = $this->get_sortable_columns();
 		$this->_column_headers = array( $columns, $hidden, $sortable );
 
 		// Set the query results to the objects items
@@ -192,10 +195,10 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 			foreach ( $rows as $row ) {
 
 				$row_count++;
-				$row_class = "hentry row-$row_count";
-				$row_class .= $row_count%2==0 ? ' alternate' : '';
+				$row_class  = "hentry row-$row_count";
+				$row_class .= $row_count % 2 == 0 ? ' alternate' : '';
 
-				echo '<tr id="user-'.$row->ID.'" data-id="'.$row->ID.'" data-type="user" data-section="user" class="'.$row_class.'">';
+				echo '<tr id="user-' . $row->ID . '" data-id="' . $row->ID . '" data-type="user" data-section="user" class="' . $row_class . '">';
 
 				$this->single_row( $row );
 
@@ -219,13 +222,16 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 		foreach ( $columns as $column_name => $column_display_name ) {
 
 			$class = "class='$column_name'";
-			$style = "";
-			if ( in_array( $column_name, $hidden ) ) $style = ' style="display:none;"';
+			$style = '';
+			if ( in_array( $column_name, $hidden ) ) {
+				$style = ' style="display:none;"';
+			}
 			$attributes = $class . $style;
 
 			switch ( $column_name ) {
 
-				case 'title': ?>
+				case 'title':
+					?>
 
 					<td <?php echo $attributes; ?>>
 
@@ -237,7 +243,7 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 
 						<?php
 						// Add the actions below the title
-							$actions = array();
+							$actions         = array();
 							$actions['edit'] = '<a href="' . get_edit_user_link( $row->ID, true ) . '" title="' . esc_attr( __( 'Edit this item' ) ) . '">' . __( 'Edit' ) . '</a>';
 							$actions['view'] = '<a href="' . get_author_posts_url( $row->ID ) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $row->title ) ) . '" rel="permalink">' . __( 'View' ) . '</a>';
 							echo $this->row_actions( $actions );
@@ -245,9 +251,11 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 
 					</td>
 
-				<?php break;
+					<?php
+					break;
 
-				case 'meta': ?>
+				case 'meta':
+					?>
 
 					<td <?php echo $attributes; ?>>
 
@@ -256,7 +264,7 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 						</div>
 
 						<div class="seom-path">
-							<span id="seom-slug-<?php echo $row->ID; ?>" name="seom-slug-<?php echo $row->ID; ?>" type="text" class="seom-slug" data-type="slug"><?php echo str_replace(get_site_url(), '', get_author_posts_url( $row->ID )); ?></span>
+							<span id="seom-slug-<?php echo $row->ID; ?>" name="seom-slug-<?php echo $row->ID; ?>" type="text" class="seom-slug" data-type="slug"><?php echo str_replace( get_site_url(), '', get_author_posts_url( $row->ID ) ); ?></span>
 						</div>
 
 						<div id="seom-desc-<?php echo $row->ID; ?>" name="seom-desc-<?php echo $row->ID; ?>" class="seom-desc editable" data-type="desc" data-value="<?php echo esc_attr( html_entity_decode( $row->wpseo_desc ) ); ?>" data-id="<?php echo $row->ID; ?>" data-placeholder="<?php _e( 'Enter a Meta Description' ); ?>">
@@ -267,9 +275,11 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 
 					</td>
 
-				<?php break;
+					<?php
+					break;
 
-				case 'seo_notes': ?>
+				case 'seo_notes':
+					?>
 
 					<td <?php echo $attributes; ?>>
 
@@ -279,7 +289,8 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 
 					</td>
 
-				<?php break;
+					<?php
+					break;
 			}
 		}
 	}
@@ -289,7 +300,7 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 	 *
 	 * @since    1.0.0
 	 */
-	protected function the_parent_slugs( $id ){
+	protected function the_parent_slugs( $id ) {
 
 		$parents = array_reverse( get_ancestors( $id, 'post' ) );
 
@@ -297,7 +308,7 @@ class SEO_Editor_User_Editor extends WP_List_Table {
 
 		foreach ( $parents as $parent ) {
 
-			$post = get_post( $parent );
+			$post       = get_post( $parent );
 			$slug_path .= trailingslashit( $post->post_name );
 		}
 

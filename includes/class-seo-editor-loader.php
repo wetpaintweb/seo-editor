@@ -100,7 +100,7 @@ class SEO_Editor_Loader {
 			'component'     => $component,
 			'callback'      => $callback,
 			'priority'      => $priority,
-			'accepted_args' => $accepted_args
+			'accepted_args' => $accepted_args,
 		);
 
 		return $hooks;

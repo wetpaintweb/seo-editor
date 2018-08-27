@@ -38,10 +38,10 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/class-seo-editor.php';
  *
  * @since    1.0.0
  */
-function run_SEO_Editor() {
+function run_seo_editor() {
 
 	$plugin = new SEO_Editor();
 	$plugin->run();
 
 }
-add_action('plugins_loaded', 'run_SEO_Editor');
+add_action( 'plugins_loaded', 'run_seo_editor' );

@@ -57,8 +57,8 @@ class SEO_Editor_Admin {
 	 */
 	public function __construct( $name, $version ) {
 
-		$this->name = $name;
-		$this->version = $version;
+		$this->name        = $name;
+		$this->version     = $version;
 		$this->admin_pages = array();
 
 	}
@@ -76,7 +76,7 @@ class SEO_Editor_Admin {
 		$screen = get_current_screen();
 		if ( in_array( $screen->id, $this->admin_pages ) ) {
 			wp_enqueue_style( $this->name, plugin_dir_url( __FILE__ ) . 'css/seo-editor-admin.css', array(), $this->version, 'all' );
-			//wp_enqueue_style('thickbox'); // TODO: 1.x Content Preview feature.
+			// wp_enqueue_style('thickbox'); // TODO: 1.x Content Preview feature.
 		}
 	}
 
@@ -93,19 +93,19 @@ class SEO_Editor_Admin {
 		$screen = get_current_screen();
 		if ( in_array( $screen->id, $this->admin_pages ) ) {
 			// Load TinyMCE
-			if ( ! class_exists('_WP_Editors' ) ) {
-				require_once( ABSPATH . WPINC . '/class-wp-editor.php' );
+			if ( ! class_exists( '_WP_Editors' ) ) {
+				require_once ABSPATH . WPINC . '/class-wp-editor.php';
 			}
 			$set = array(
-				'teeny' => false,
-				'tinymce' => true,
-				'quicktags' => false
+				'teeny'     => false,
+				'tinymce'   => true,
+				'quicktags' => false,
 			);
 			$set = _WP_Editors::parse_settings( $this->name, $set );
 			_WP_Editors::editor_settings( $this->name, $set );
 
-			//wp_enqueue_script( 'thickbox' ); // Modal Window // TODO: 1.x Content Preview feature.
-			wp_enqueue_script( $this->name, plugin_dir_url( __FILE__ ) . 'js/seo-editor-admin.js', array( 'jquery' ), $this->version, FALSE );
+			// wp_enqueue_script( 'thickbox' ); // Modal Window // TODO: 1.x Content Preview feature.
+			wp_enqueue_script( $this->name, plugin_dir_url( __FILE__ ) . 'js/seo-editor-admin.js', array( 'jquery' ), $this->version, false );
 			wp_localize_script( $this->name, 'seom_obj', array( 'seom_nonce' => wp_create_nonce( 'seom-nonce' ) ) );
 		}
 	}
@@ -121,7 +121,7 @@ class SEO_Editor_Admin {
 			$screen = get_current_screen();
 			if ( $screen->id == 'plugins' ) {
 				echo '<div class="error"><p>';
-		        	echo _e( '<strong>SEO Editor</strong>: Please install one of the following SEO plugins to get started: <a href="/wp-admin/plugin-install.php?tab=search&s=wordpress+seo">WordPress SEO by Yoast</a> or <a href="/wp-admin/plugin-install.php?tab=search&s=all+in+one+seo+pack">All In One SEO Pack</a>.' );
+					echo _e( '<strong>SEO Editor</strong>: Please install one of the following SEO plugins to get started: <a href="/wp-admin/plugin-install.php?tab=search&s=WordPress+seo">WordPress SEO by Yoast</a> or <a href="/wp-admin/plugin-install.php?tab=search&s=all+in+one+seo+pack">All In One SEO Pack</a>.' );
 				echo '</p></div>';
 			}
 		}
@@ -140,7 +140,7 @@ class SEO_Editor_Admin {
 				'Bulk Editor',
 				'Bulk Editor',
 				'manage_options',
-				$this->name.'_yoast_seo',
+				$this->name . '_yoast_seo',
 				array( $this, 'editor_page' )
 			);
 
@@ -165,12 +165,12 @@ class SEO_Editor_Admin {
 	 */
 	public function aioseop_add_pages() {
 
-		$admin_page = add_submenu_page (
+		$admin_page = add_submenu_page(
 			'all-in-one-seo-pack/aioseop_class.php',
 			'Bulk Editor',
 			'Bulk Editor',
 			'manage_options',
-			$this->name.'_aioseop',
+			$this->name . '_aioseop',
 			array( $this, 'editor_page' )
 		);
 
@@ -190,7 +190,7 @@ class SEO_Editor_Admin {
 		global $submenu;
 
 		// Reorder Yoast SEO menu items
-		if ( isset($submenu['wpseo_dashboard'])) {
+		if ( isset( $submenu['wpseo_dashboard'] ) ) {
 			$total_items = count( $submenu['wpseo_dashboard'] );
 
 			if ( $total_items > 2 ) {
@@ -198,15 +198,14 @@ class SEO_Editor_Admin {
 				$new_menu = $submenu['wpseo_dashboard'];
 
 				// 2nd to last item becomes last item
-				$new_menu[$total_items - 2] = $submenu['wpseo_dashboard'][$total_items - 1];
+				$new_menu[ $total_items - 2 ] = $submenu['wpseo_dashboard'][ $total_items - 1 ];
 
 				// last item becoms second to last item
-				$new_menu[$total_items - 1] = $submenu['wpseo_dashboard'][$total_items - 2];
+				$new_menu[ $total_items - 1 ] = $submenu['wpseo_dashboard'][ $total_items - 2 ];
 
 				$submenu['wpseo_dashboard'] = $new_menu;
 
 			}
-
 		}
 		return $menu_order;
 	}
@@ -229,7 +228,7 @@ class SEO_Editor_Admin {
 				'title'    => 'Getting Started',
 				'id'       => 'getting_started_tab',
 				'content'  => '<p>Built for search marketers, the SEO Editor is designed to edit SEO data in bulk across your entire site.</p><p>Keywords, Page Meta, and SEO notes are inline editable - so just click on the text you want to edit and begin typing!</p>',
-				'callback' => false
+				'callback' => false,
 			)
 		);
 
@@ -241,9 +240,9 @@ class SEO_Editor_Admin {
 		$this->admin_screen->add_option(
 			'per_page',
 			array(
-				'label' => 'Entries per page',
+				'label'   => 'Entries per page',
 				'default' => 20,
-				'option' => 'edit_per_page'
+				'option'  => 'edit_per_page',
 			)
 		);
 	}
@@ -259,19 +258,24 @@ class SEO_Editor_Admin {
 		global $content_type;
 
 		$screen = get_current_screen();
-		$config = SEO_Editor_Admin::get_screen_config( $screen->id );
+		$config = self::get_screen_config( $screen->id );
 
 		echo '<form id="seom-filter" method="get" action="">';
 
-		echo '<input name="page" type="hidden" value="' . esc_attr( SEO_Editor_Admin::get_current_page() ) . '" />';
+		echo '<input name="page" type="hidden" value="' . esc_attr( self::get_current_page() ) . '" />';
 
 		echo '<div class="alignleft actions">';
 
 		$options = '';
 
 		// Posts
-		$post_types = get_post_types( array( 'public' => true, 'exclude_from_search' => false ) );
-		$options .= '<optgroup label="Post Types">';
+		$post_types = get_post_types(
+			array(
+				'public'              => true,
+				'exclude_from_search' => false,
+			)
+		);
+		$options   .= '<optgroup label="Post Types">';
 		foreach ( $post_types as $post_type ) {
 			$obj = get_post_type_object( $post_type );
 			if ( $obj->labels->name != 'Media' ) {
@@ -280,25 +284,25 @@ class SEO_Editor_Admin {
 		}
 		$options .= '</optgroup>';
 
-		if ($config['tax_support']) {
+		if ( $config['tax_support'] ) {
 			// Taxonomy
 			$taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
-			$options .= '<optgroup label="Taxonomy">';
+			$options   .= '<optgroup label="Taxonomy">';
 			foreach ( $taxonomies as $taxonomy ) {
-				if ($taxonomy->name != 'post_format') {
+				if ( $taxonomy->name != 'post_format' ) {
 					$options .= sprintf( '<option value="%2$s" %3$s>%1$s</option>', __( $taxonomy->labels->name ), __( $taxonomy->name ), selected( $content_type, $taxonomy->name, false ) );
 				}
 			}
 			$options .= '</optgroup>';
 		}
 
-		if ($config['user_support']) {
+		if ( $config['user_support'] ) {
 			$options .= '<optgroup label="Users">';
-			$options .= '<option value="' . __('users') . '"' . selected( $content_type, 'users', false ) . '>' . __('All Users') . '</option>';
+			$options .= '<option value="' . __( 'users' ) . '"' . selected( $content_type, 'users', false ) . '>' . __( 'All Users' ) . '</option>';
 			$options .= '</optgroup>';
 		}
 
-		echo sprintf( '<select name="content_type">%1$s</select>' , $options );
+		echo sprintf( '<select name="content_type">%1$s</select>', $options );
 
 		submit_button( __( 'Select' ), 'button', false, false, array( 'id' => 'post-query-submit' ) );
 
@@ -318,28 +322,26 @@ class SEO_Editor_Admin {
 		// Get content type filter value
 		$content_type = isset( $_REQUEST['content_type'] ) ? $_REQUEST['content_type'] : 'page';
 
-		//Get all the available taxonomies to compare with the content_type
+		// Get all the available taxonomies to compare with the content_type
 		$taxonomies = get_taxonomies( array( 'public' => true ) );
 
-		//TODO: Break this up into user sub-groups? and make sure it matches what is set in the admin_page_content_filter options
-		$user = array('users');
+		// TODO: Break this up into user sub-groups? and make sure it matches what is set in the admin_page_content_filter options
+		$user = array( 'users' );
 
 		// Check the content type and load the correct class to handle it
 		if ( isset( $taxonomies ) && in_array( $content_type, $taxonomies ) ) {
-			if ( !class_exists( 'SEO_Editor_Taxonomy_Editor' ) ) {
-				require_once(  plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-seo-editor-taxonomy-editor.php' );
+			if ( ! class_exists( 'SEO_Editor_Taxonomy_Editor' ) ) {
+				require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-seo-editor-taxonomy-editor.php';
 				$seo_editor_list_table = new SEO_Editor_Taxonomy_Editor( $content_type );
 			}
-		}
-		elseif ( isset( $user ) && in_array( $content_type, $user ) ) {
-			if ( !class_exists( 'SEO_Editor_User_Editor' ) ) {
-				require_once(  plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-seo-editor-user-editor.php' );
+		} elseif ( isset( $user ) && in_array( $content_type, $user ) ) {
+			if ( ! class_exists( 'SEO_Editor_User_Editor' ) ) {
+				require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-seo-editor-user-editor.php';
 				$seo_editor_list_table = new SEO_Editor_User_Editor( $content_type );
 			}
-		}
-		else {
+		} else {
 			if ( ! class_exists( 'SEO_Editor_Post_Editor' ) ) {
-				require_once(  plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-seo-editor-post-editor.php' );
+				require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-seo-editor-post-editor.php';
 				$seo_editor_list_table = new SEO_Editor_Post_Editor( $content_type );
 			}
 		}
@@ -351,20 +353,20 @@ class SEO_Editor_Admin {
 
 		$seo_editor_list_table->prepare_items();
 
-	?>
+		?>
 
 		<div class="wrap seo_editor_table_page">
 			<div id="icon-edit-pages" class="icon32 icon32-posts-page"></div>
 			<h2>SEO Editor</h2>
 
 			<?php if ( isset( $notice ) && $notice ) : ?>
-			<div id="notice" class="error"><p id="has-newer-autosave"><?php echo $notice ?></p></div>
+			<div id="notice" class="error"><p id="has-newer-autosave"><?php echo $notice; ?></p></div>
 			<?php endif; ?>
 
 			<?php // This is used to display messages from the ajax save call ?>
 			<div id="message" class=""></div>
 
-			<?php //TODO: Test heartbeat API to make sure there is a connection ?>
+			<?php // TODO: Test heartbeat API to make sure there is a connection ?>
 			<div id="lost-connection-notice" class="error hidden">
 				<p><span class="spinner"></span> <?php _e( '<strong>Connection lost.</strong> Saving has been disabled until you&#8217;re reconnected.' ); ?>
 				<span class="hide-if-no-sessionstorage"><?php _e( 'We&#8217;re backing up this post in your browser, just in case.' ); ?></span>
@@ -383,7 +385,7 @@ class SEO_Editor_Admin {
 			<br class="clear" />
 		</div>
 
-	<?php
+		<?php
 	}
 
 	/**
@@ -392,15 +394,15 @@ class SEO_Editor_Admin {
 	 * @since    1.0.0
 	 */
 	public function save_changes() {
-		$config = SEO_Editor_Admin::get_screen_config( $_POST['adminpage'] );
+		$config = self::get_screen_config( $_POST['adminpage'] );
 
 		$response = array(); // Set empty array for response to be sent back to ajax call
 
 		// Return if empty nonse failed
-		if ( !isset( $_POST['seom_nonce'] ) || ! wp_verify_nonce( $_POST['seom_nonce'], 'seom-nonce' ) ) {
+		if ( ! isset( $_POST['seom_nonce'] ) || ! wp_verify_nonce( $_POST['seom_nonce'], 'seom-nonce' ) ) {
 			$response = array(
-				'status' => 0,
-				'message' => 'Permissions Check Failed'
+				'status'  => 0,
+				'message' => 'Permissions Check Failed',
 			);
 			echo json_encode( $response ); // Error Message
 			die();
@@ -409,17 +411,16 @@ class SEO_Editor_Admin {
 		// Return if empty SEO
 		if ( empty( $_POST['seom_data'] ) ) {
 			$response = array(
-				'status' => 0,
-				'message' => 'Nothing was saved, because there were no changes. Don\'t be shy!'
+				'status'  => 0,
+				'message' => 'Nothing was saved, because there were no changes. Don\'t be shy!',
 			);
 			echo json_encode( $response ); // Error Message
 			die();
 		}
 
-
-		$taxonomies_seo = false;
+		$taxonomies_seo        = false;
 		$taxonomies_seo_editor = false;
-		$taxonomies_slug = false;
+		$taxonomies_slug       = false;
 
 		$seom_data = $_POST['seom_data'];
 		foreach ( $seom_data as $key => $seo_changes ) {
@@ -434,101 +435,103 @@ class SEO_Editor_Admin {
 					switch ( $seo_changes['field'] ) {
 						case 'title':
 							$status = update_user_meta( $seo_changes['id'], $config['usertitle'], $data );
-						break;
+							break;
 						case 'desc':
 							$status = update_user_meta( $seo_changes['id'], $config['userdesc'], $data );
-						break;
+							break;
 						case 'reviewed':
 							$status = update_user_meta( $seo_changes['id'], '_seo_editor_reviewed', $data );
-						break;
+							break;
 						case 'seo_notes':
 							$status = update_user_meta( $seo_changes['id'], '_seo_editor_notes', $data );
-						break;
+							break;
 					}
-				break;
+					break;
 
 				// Save taxonomy content
 				case 'taxonomy':
 					if ( $taxonomies_seo === false ) {
 						// Get all taxonomy terms SEO data - returns an unserialized array of all the taxonomies SEO
-						$taxonomies_seo = get_option( 'wpseo_taxonomy_meta' );
+						$taxonomies_seo        = get_option( 'wpseo_taxonomy_meta' );
 						$taxonomies_seo_editor = get_option( 'seo_editor_taxonomy_meta' );
 					}
-					if ( ! isset( $taxonomies_seo[$seo_changes['type']] ) ) {
-						$taxonomies_seo[$seo_changes['type']] = array();
+					if ( ! isset( $taxonomies_seo[ $seo_changes['type'] ] ) ) {
+						$taxonomies_seo[ $seo_changes['type'] ] = array();
 					}
-					if ( ! isset( $taxonomies_seo_editor[$seo_changes['type']] ) ) {
-						$taxonomies_seo_editor[$seo_changes['type']] = array();
+					if ( ! isset( $taxonomies_seo_editor[ $seo_changes['type'] ] ) ) {
+						$taxonomies_seo_editor[ $seo_changes['type'] ] = array();
 					}
-					if ( ! isset($taxonomies_seo[$seo_changes['type']][$seo_changes['id']] ) ) {
-						$taxonomies_seo[$seo_changes['type']][$seo_changes['id']] = array();
+					if ( ! isset( $taxonomies_seo[ $seo_changes['type'] ][ $seo_changes['id'] ] ) ) {
+						$taxonomies_seo[ $seo_changes['type'] ][ $seo_changes['id'] ] = array();
 					}
-					if ( ! isset($taxonomies_seo_editor[$seo_changes['type']][$seo_changes['id']] ) ) {
-						$taxonomies_seo_editor[$seo_changes['type']][$seo_changes['id']] = array();
+					if ( ! isset( $taxonomies_seo_editor[ $seo_changes['type'] ][ $seo_changes['id'] ] ) ) {
+						$taxonomies_seo_editor[ $seo_changes['type'] ][ $seo_changes['id'] ] = array();
 					}
 					switch ( $seo_changes['field'] ) {
 						case 'slug':
 							wp_update_term( $seo_changes['id'], $seo_changes['type'], array( 'slug' => $data ) );
-						break;
+							break;
 						case 'title':
-							$taxonomies_seo[$seo_changes['type']][$seo_changes['id']][$config['taxtitle']] = $data;
-						break;
+							$taxonomies_seo[ $seo_changes['type'] ][ $seo_changes['id'] ][ $config['taxtitle'] ] = $data;
+							break;
 						case 'desc':
-							$taxonomies_seo[$seo_changes['type']][$seo_changes['id']][$config['taxdesc']] = $data;
-						break;
+							$taxonomies_seo[ $seo_changes['type'] ][ $seo_changes['id'] ][ $config['taxdesc'] ] = $data;
+							break;
 						case 'reviewed':
-							$taxonomies_seo_editor[$seo_changes['type']][$seo_changes['id']]['reviewed'] = $data;
-						break;
+							$taxonomies_seo_editor[ $seo_changes['type'] ][ $seo_changes['id'] ]['reviewed'] = $data;
+							break;
 						case 'seo_notes':
-							$taxonomies_seo_editor[$seo_changes['type']][$seo_changes['id']]['notes'] = $data;
-						break;
+							$taxonomies_seo_editor[ $seo_changes['type'] ][ $seo_changes['id'] ]['notes'] = $data;
+							break;
 					}
 					$status = true;
-				break;
+					break;
 
 				// Save post content
 				case 'post':
 				default:
 					switch ( $seo_changes['field'] ) {
 						case 'slug':
-							$status = wp_update_post( array (
+							$status = wp_update_post(
+								array(
 									'ID'        => $seo_changes['id'],
 									'post_name' => $data,
-								));
-						break;
+								)
+							);
+							break;
 						case 'keyword':
 							$status = update_post_meta( $seo_changes['id'], $config['focuskw'], $data );
-						break;
+							break;
 						case 'title':
 							$status = update_post_meta( $seo_changes['id'], $config['title'], $data );
-						break;
+							break;
 						case 'desc':
 							$status = update_post_meta( $seo_changes['id'], $config['metadesc'], $data );
-						break;
+							break;
 						case 'reviewed':
 							$status = update_post_meta( $seo_changes['id'], '_seo_editor_reviewed', $data );
-						break;
+							break;
 						case 'seo_notes':
 							$status = update_post_meta( $seo_changes['id'], '_seo_editor_notes', $data );
-						break;
+							break;
 					}
 
-				break;
+					break;
 			}
 
-			$seom_data[$key]['status'] = $status;
+			$seom_data[ $key ]['status'] = $status;
 		}
 
-		if ($taxonomies_seo !== false) {
+		if ( $taxonomies_seo !== false ) {
 			update_option( 'wpseo_taxonomy_meta', $taxonomies_seo );
 		}
-		if ($taxonomies_seo_editor !== false) {
+		if ( $taxonomies_seo_editor !== false ) {
 			update_option( 'seo_editor_taxonomy_meta', $taxonomies_seo_editor );
 		}
 
 		$response = array(
-			'status' => 1,
-			'changes' => $seom_data
+			'status'  => 1,
+			'changes' => $seom_data,
 		);
 
 		echo json_encode( $response );
@@ -544,11 +547,16 @@ class SEO_Editor_Admin {
 	public function export_button() {
 		echo '<form id="export-seo-post" action="" method="get">';
 		echo '<div class="alignleft actions">';
-		echo '<input type="hidden" name="page" value="' . esc_attr( SEO_Editor_Admin::get_current_page() ) . '" />';
+		echo '<input type="hidden" name="page" value="' . esc_attr( self::get_current_page() ) . '" />';
 		echo '<input type="hidden" name="seo_editor_export" value="true" />';
-		submit_button( __( 'Export SEO' ), 'button', false, false, array( 'id' => 'post-export', 'title' => 'Export All SEO into a .CSV' ) );
+		submit_button(
+			__( 'Export SEO' ), 'button', false, false, array(
+				'id'    => 'post-export',
+				'title' => 'Export All SEO into a .CSV',
+			)
+		);
 		echo '</div>';
-		echo "</form>";
+		echo '</form>';
 	}
 
 	/**
@@ -560,37 +568,45 @@ class SEO_Editor_Admin {
 	 */
 	public function export() {
 
-		if ( ! empty($_REQUEST['seo_editor_export']) ) {
+		if ( ! empty( $_REQUEST['seo_editor_export'] ) ) {
 			global $wpdb;
 
-			$config = SEO_Editor_Admin::get_screen_config( SEO_Editor_Admin::get_current_page() );
+			$config = self::get_screen_config( self::get_current_page() );
 
 			// Set up CSV file headers and columns
 			header( 'Content-type: application/csv' );
 			header( 'Content-Disposition: attachment; filename=seo-edtior-export.' . date( 'Y-m-d' ) . '.csv' );
 			header( 'Pragma: no-cache' );
 			header( 'Expires: 0' );
-			$out = fopen('php://output', 'w');
-			fputcsv($out, array(
-				'Title/Name',
-				'Type',
-				'Status',
-				'URL',
-				'Canonical Link',
-				'Meta Keyword',
-				'Meta Title',
-				'Meta Description',
-				'Comments/Notes'
-			));
+			$out = fopen( 'php://output', 'w' );
+			fputcsv(
+				$out, array(
+					'Title/Name',
+					'Type',
+					'Status',
+					'URL',
+					'Canonical Link',
+					'Meta Keyword',
+					'Meta Title',
+					'Meta Description',
+					'Comments/Notes',
+				)
+			);
 
-			/* Export Post SEO */
+			/*
+			 Export Post SEO */
 			// Get available post types for query
-			$post_types = get_post_types( array( 'public' => true, 'exclude_from_search' => false ) );
+			$post_types = get_post_types(
+				array(
+					'public'              => true,
+					'exclude_from_search' => false,
+				)
+			);
 			$post_types = "'" . implode( "', '", $post_types ) . "'";
 
 			// Get available post statuses for query
-			$post_statuses = get_post_stati( array('show_in_admin_all_list' => true) );
-			$post_status = "'" . implode( "', '", $post_statuses ) . "'";
+			$post_statuses = get_post_stati( array( 'show_in_admin_all_list' => true ) );
+			$post_status   = "'" . implode( "', '", $post_statuses ) . "'";
 
 			// Query Posts
 			$post_query = "SELECT
@@ -615,17 +631,19 @@ class SEO_Editor_Admin {
 			$post_items = $wpdb->get_results( $post_query );
 			foreach ( $post_items as $item ) {
 
-				fputcsv($out, array(
-					$item->title, //~ 'Name',
-					get_post_type_object( $item->type )->labels->singular_name, //~ 'Type',
-					get_post_status_object( $item->status )->label, //~ 'Post Status',
-					get_permalink( $item->ID ), //~ 'URL',
-					$item->seo_canonical, //~ 'Canonical Link'
-					html_entity_decode( $item->seo_kw ), //~ 'Focus Keyword',
-					html_entity_decode( $item->seo_title ), //~ 'Title',
-					html_entity_decode( $item->seo_desc ), //~ 'Meta Description'
-					html_entity_decode( $item->seo_notes ) //~ 'Comments'
-				));
+				fputcsv(
+					$out, array(
+						$item->title, // ~ 'Name',
+						get_post_type_object( $item->type )->labels->singular_name, // ~ 'Type',
+						get_post_status_object( $item->status )->label, // ~ 'Post Status',
+						get_permalink( $item->ID ), // ~ 'URL',
+						$item->seo_canonical, // ~ 'Canonical Link'
+						html_entity_decode( $item->seo_kw ), // ~ 'Focus Keyword',
+						html_entity_decode( $item->seo_title ), // ~ 'Title',
+						html_entity_decode( $item->seo_desc ), // ~ 'Meta Description'
+						html_entity_decode( $item->seo_notes ), // ~ 'Comments'
+					)
+				);
 			}
 
 			if ( $config['user_support'] ) {
@@ -647,26 +665,28 @@ class SEO_Editor_Admin {
 
 				foreach ( $user_items as $item ) {
 					$user_data = get_userdata( $item->ID );
-					fputcsv($out, array(
-						$item->title, //~ 'Name',
-						'User', //~ 'Type',
-						implode( ", ", $user_data->roles ), //~ 'Post Status',
-						get_author_posts_url( $item->ID ), //~ 'URL',
-						'n/a for this content', //~ 'Canonical Link' not available
-						'n/a for this content', //~ 'Focus Keyword', not available
-						html_entity_decode( $item->seo_title ), //~ 'Title',
-						html_entity_decode( $item->seo_desc ), //~ 'Meta Description'
-						html_entity_decode( $item->seo_notes ) //~ 'Comments'
-					));
+					fputcsv(
+						$out, array(
+							$item->title, // ~ 'Name',
+							'User', // ~ 'Type',
+							implode( ', ', $user_data->roles ), // ~ 'Post Status',
+							get_author_posts_url( $item->ID ), // ~ 'URL',
+							'n/a for this content', // ~ 'Canonical Link' not available
+							'n/a for this content', // ~ 'Focus Keyword', not available
+							html_entity_decode( $item->seo_title ), // ~ 'Title',
+							html_entity_decode( $item->seo_desc ), // ~ 'Meta Description'
+							html_entity_decode( $item->seo_notes ), // ~ 'Comments'
+						)
+					);
 				}
 			}
 
-			if ($config['tax_support']) {
+			if ( $config['tax_support'] ) {
 				// Query to collect taxonomy and SEO data
 				$taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
 
 				// Get all taxonomy terms SEO data - returns an unserialized array of all the taxonomies SEO
-				$taxonomies_seo = get_option( 'wpseo_taxonomy_meta' );
+				$taxonomies_seo        = get_option( 'wpseo_taxonomy_meta' );
 				$taxonomies_seo_editor = get_option( 'seo_editor_taxonomy_meta' );
 
 				foreach ( $taxonomies as $taxonomy ) {
@@ -678,33 +698,33 @@ class SEO_Editor_Admin {
 
 						if ( isset( $taxonomies_seo[ $taxonomy->name ] ) && isset( $taxonomies_seo[ $taxonomy->name ][ $term->term_id ] ) ) {
 							$tax_term_seo = $taxonomies_seo[ $taxonomy->name ][ $term->term_id ];
-						}
-						else {
+						} else {
 							$tax_term_seo = array(
 								'wpseo_canonical' => '',
-								'wpseo_title' => '',
-								'wpseo_desc' => ''
+								'wpseo_title'     => '',
+								'wpseo_desc'      => '',
 							);
 						}
 
 						if ( isset( $taxonomies_seo_editor[ $taxonomy->name ] ) && isset( $taxonomies_seo_editor[ $taxonomy->name ][ $term->term_id ] ) ) {
 							$tax_term_seo_editor = $taxonomies_seo_editor[ $taxonomy->name ][ $term->term_id ];
-						}
-						else {
+						} else {
 							$tax_term_seo_editor = array( 'notes' => '' );
 						}
 
-						fputcsv($out, array(
-							$term->name, //~ 'Name',
-							$taxonomy->labels->name, //~ 'Type',
-							'', //~ 'Status',
-							get_term_link( $term ), //~ 'URL',
-							isset( $tax_term_seo['wpseo_canonical'] ) ? $tax_term_seo['wpseo_canonical'] : '', //~ 'Canonical Link' not available
-							'n/a for this content', //~ 'Focus Keyword', not available
-							html_entity_decode( $tax_term_seo['wpseo_title'] ), //~ 'Title',
-							html_entity_decode( $tax_term_seo['wpseo_desc'] ), //~ 'Meta Description'
-							html_entity_decode( $tax_term_seo_editor['notes'] ) //~ 'Comments'
-						));
+						fputcsv(
+							$out, array(
+								$term->name, // ~ 'Name',
+								$taxonomy->labels->name, // ~ 'Type',
+								'', // ~ 'Status',
+								get_term_link( $term ), // ~ 'URL',
+								isset( $tax_term_seo['wpseo_canonical'] ) ? $tax_term_seo['wpseo_canonical'] : '', // ~ 'Canonical Link' not available
+								'n/a for this content', // ~ 'Focus Keyword', not available
+								html_entity_decode( $tax_term_seo['wpseo_title'] ), // ~ 'Title',
+								html_entity_decode( $tax_term_seo['wpseo_desc'] ), // ~ 'Meta Description'
+								html_entity_decode( $tax_term_seo_editor['notes'] ), // ~ 'Comments'
+							)
+						);
 					}
 				}
 			}
@@ -728,27 +748,26 @@ class SEO_Editor_Admin {
 		if ( strpos( $screen, 'yoast_seo' ) !== false ) {
 			// Yoast WordPress SEO
 			return array(
-				'title' => '_yoast_wpseo_title',
-				'metadesc' => '_yoast_wpseo_metadesc',
-				'focuskw' => '_yoast_wpseo_focuskw',
-				'canonical' => '_yoast_wpseo_canonical',
+				'title'        => '_yoast_wpseo_title',
+				'metadesc'     => '_yoast_wpseo_metadesc',
+				'focuskw'      => '_yoast_wpseo_focuskw',
+				'canonical'    => '_yoast_wpseo_canonical',
 				'user_support' => true,
-				'usertitle' => 'wpseo_title',
-				'userdesc' => 'wpseo_desc',
-				'tax_support' => true,
-				'taxtitle' => 'wpseo_title',
-				'taxdesc' => 'wpseo_desc'
+				'usertitle'    => 'wpseo_title',
+				'userdesc'     => 'wpseo_desc',
+				'tax_support'  => true,
+				'taxtitle'     => 'wpseo_title',
+				'taxdesc'      => 'wpseo_desc',
 			);
-		}
-		elseif ( strpos( $screen, 'aioseop' ) !== false ) {
+		} elseif ( strpos( $screen, 'aioseop' ) !== false ) {
 			// All In One SEO Pack
 			return array(
-				'title' => '_aioseop_title',
-				'metadesc' => '_aioseop_description',
-				'focuskw' => '_aioseop_keywords',
-				'canonical' => '_aioseop_custom_link',
+				'title'        => '_aioseop_title',
+				'metadesc'     => '_aioseop_description',
+				'focuskw'      => '_aioseop_keywords',
+				'canonical'    => '_aioseop_custom_link',
 				'user_support' => false,
-				'tax_support' => false
+				'tax_support'  => false,
 			);
 		}
 	}
@@ -767,7 +786,7 @@ class SEO_Editor_Admin {
 
 	/**
 	 * Heavily restricts the possible columns by which a user can order the table in the bulk editor, thereby preventing a possible CSRF vulnerability.
-	 * Taken from wordpress seo class-bulk-editor-list-table.php
+	 * Taken from WordPress seo class-bulk-editor-list-table.php
 	 * https://github.com/Yoast/wordpress-seo/blob/master/admin/class-bulk-editor-list-table.php
 	 *
 	 * @since    1.0.0
@@ -781,7 +800,7 @@ class SEO_Editor_Admin {
 			'post_title',
 			'seo_kw',
 			'display_name',
-			'user_registered, display_name'
+			'user_registered, display_name',
 		);
 
 		if ( in_array( $orderby, $valid_column_names ) ) {
@@ -793,7 +812,7 @@ class SEO_Editor_Admin {
 
 	/**
 	 * Makes sure the order clause is always ASC or DESC for the bulk editor table, thereby preventing a possible CSRF vulnerability
-	 * Taken from wordpress seo class-bulk-editor-list-table.php
+	 * Taken from WordPress seo class-bulk-editor-list-table.php
 	 * https://github.com/Yoast/wordpress-seo/blob/master/admin/class-bulk-editor-list-table.php
 	 *
 	 * @since    1.0.0

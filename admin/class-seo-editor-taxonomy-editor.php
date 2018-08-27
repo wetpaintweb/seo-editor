@@ -8,7 +8,7 @@
  */
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
-	require_once( plugin_dir_path( dirname( __FILE__ ) ) . '/includes/class-wp-list-table.php' );
+	require_once plugin_dir_path( dirname( __FILE__ ) ) . '/includes/class-wp-list-table.php';
 }
 
 class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
@@ -17,11 +17,13 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 	function __construct( $content_type = 'taxonomy' ) {
 
-		parent::__construct( array(
-			'singular' => 'SEO Entry',
-			'plural' => 'SEO Entries',
-			'ajax' => true
-		) );
+		parent::__construct(
+			array(
+				'singular' => 'SEO Entry',
+				'plural'   => 'SEO Entries',
+				'ajax'     => true,
+			)
+		);
 
 		$this->screen->taxonomy = $content_type;
 	}
@@ -29,7 +31,7 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 	/**
 	 * Check the current user's permissions.
 	 *
- 	 * @since 1.0.0
+	 * @since 1.0.0
 	 * @access public
 	 */
 	public function ajax_user_can() {
@@ -44,9 +46,9 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 	 */
 	function get_columns() {
 		return $columns = array(
-			'title' => __( 'Title' ),
-			'meta' => __( 'Page Meta' ),
-			'seo_notes' => __( 'SEO Notes' )
+			'title'     => __( 'Title' ),
+			'meta'      => __( 'Page Meta' ),
+			'seo_notes' => __( 'SEO Notes' ),
 		);
 	}
 
@@ -56,8 +58,7 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 	 * @since    1.0.0
 	 */
 	function get_sortable_columns() {
-		return $sortable = array(
-		);
+		return $sortable = array();
 	}
 
 	/**
@@ -69,7 +70,7 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 	public function display_save_button() {
 
-		echo '<a class="button-primary seom-save alignright" href="#save-changes" accesskey="s">' . __('Save Changes') . '</a>';
+		echo '<a class="button-primary seom-save alignright" href="#save-changes" accesskey="s">' . __( 'Save Changes' ) . '</a>';
 
 	}
 
@@ -91,11 +92,11 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 		echo '<div class="tablenav ' . esc_attr( $which ) . '">';
 
-			if ( 'top' == $which ){
+		if ( 'top' == $which ) {
 
-				$this->views();
+			$this->views();
 
-			}
+		}
 
 			$this->pagination( $which );
 
@@ -119,22 +120,22 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 		$tax_terms = get_terms( $taxonomy, array( 'hide_empty' => false ) );
 
 		// Get all taxonomy terms SEO data - returns an unserialized array of all the taxonomies SEO
-		$taxonomies_seo = get_option( 'wpseo_taxonomy_meta' );
+		$taxonomies_seo        = get_option( 'wpseo_taxonomy_meta' );
 		$taxonomies_seo_editor = get_option( 'seo_editor_taxonomy_meta' );
 
 		// Loop through taxonomy and add to taxonomy SEO
 		foreach ( $tax_terms as $tax_term ) {
 			// Init the values so they arn't missing when being used
 			$tax_term->wpseo_title = '';
-			$tax_term->wpseo_desc = '';
-			$tax_term->reviewed = '';
-			$tax_term->seo_notes = '';
+			$tax_term->wpseo_desc  = '';
+			$tax_term->reviewed    = '';
+			$tax_term->seo_notes   = '';
 
 			// Check if there is any SEO for the term in the array from WordPress SEO
-			if ( isset( $taxonomies_seo[$tax_term->taxonomy] ) && isset( $taxonomies_seo[$tax_term->taxonomy][$tax_term->term_id] ) ) {
+			if ( isset( $taxonomies_seo[ $tax_term->taxonomy ] ) && isset( $taxonomies_seo[ $tax_term->taxonomy ][ $tax_term->term_id ] ) ) {
 
 				// Collect the SEO for this term from the array from WordPress SEO
-				$tax_term_seo = $taxonomies_seo[$tax_term->taxonomy][$tax_term->term_id];
+				$tax_term_seo = $taxonomies_seo[ $tax_term->taxonomy ][ $tax_term->term_id ];
 
 				// If the title is set for the term add it to the object
 				if ( isset( $tax_term_seo['wpseo_title'] ) ) {
@@ -148,10 +149,10 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 			}
 
 			// Check if there is any SEO for the term in the array from SEO Editor
-			if ( isset( $taxonomies_seo_editor[$tax_term->taxonomy] ) && isset( $taxonomies_seo_editor[$tax_term->taxonomy][$tax_term->term_id] ) ) {
+			if ( isset( $taxonomies_seo_editor[ $tax_term->taxonomy ] ) && isset( $taxonomies_seo_editor[ $tax_term->taxonomy ][ $tax_term->term_id ] ) ) {
 
 				// Collect the SEO for this term from the array from WordPress SEO
-				$tax_term_seo = $taxonomies_seo_editor[$tax_term->taxonomy][$tax_term->term_id];
+				$tax_term_seo = $taxonomies_seo_editor[ $tax_term->taxonomy ][ $tax_term->term_id ];
 
 				// If the reviewed is set for the term add it to the object
 				if ( isset( $tax_term_seo['reviewed'] ) ) {
@@ -165,7 +166,7 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 			}
 		}
 
-		$this->hierarchical_display = false; //TODO: 1.x use this to help display the taxonomy in a hierarchy
+		$this->hierarchical_display = false; // TODO: 1.x use this to help display the taxonomy in a hierarchy
 
 		// Pagination
 		$total_items = count( $tax_terms );
@@ -174,27 +175,29 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 		$paged = isset( $_GET['paged'] ) ? esc_sql( $_GET['paged'] ) : '';
 
-		if ( empty( $paged ) || !is_numeric( $paged ) || $paged <= 0 ) {
+		if ( empty( $paged ) || ! is_numeric( $paged ) || $paged <= 0 ) {
 			$paged = 1;
 		}
 
 		$total_pages = ceil( $total_items / $per_page );
 
-		if ( !empty( $paged ) && !empty( $per_page ) ) {
-			$offset = ($paged - 1) * $per_page;
-			$tax_terms =  array_slice( $tax_terms, (int) $offset, (int) $per_page );
+		if ( ! empty( $paged ) && ! empty( $per_page ) ) {
+			$offset    = ( $paged - 1 ) * $per_page;
+			$tax_terms = array_slice( $tax_terms, (int) $offset, (int) $per_page );
 		}
 
-		$this->set_pagination_args( array(
-			'total_items' => $total_items,
-			'total_pages' => $total_pages,
-			'per_page' => $per_page
-		) );
+		$this->set_pagination_args(
+			array(
+				'total_items' => $total_items,
+				'total_pages' => $total_pages,
+				'per_page'    => $per_page,
+			)
+		);
 
 		// Set column headers
-		$columns = $this->get_columns();
-		$hidden = array();
-		$sortable = $this->get_sortable_columns();
+		$columns               = $this->get_columns();
+		$hidden                = array();
+		$sortable              = $this->get_sortable_columns();
 		$this->_column_headers = array( $columns, $hidden, $sortable );
 
 		// Set the query results to the objects items
@@ -223,10 +226,10 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 			foreach ( $rows as $row ) {
 
 				$row_count++;
-				$row_class = "hentry row-$row_count";
+				$row_class  = "hentry row-$row_count";
 				$row_class .= $row_count % 2 === 0 ? ' alternate' : '';
 
-				echo '<tr id="'.$taxonomy.'-'.$row->term_id.'" data-id="'.$row->term_id.'" data-type="'.$taxonomy.'" data-section="taxonomy" class="'.$row_class.'">';
+				echo '<tr id="' . $taxonomy . '-' . $row->term_id . '" data-id="' . $row->term_id . '" data-type="' . $taxonomy . '" data-section="taxonomy" class="' . $row_class . '">';
 
 				$this->single_row( $row );
 
@@ -252,7 +255,7 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 		foreach ( $columns as $column_name => $column_display_name ) {
 
 			$class = "class='$column_name'";
-			$style = "";
+			$style = '';
 			if ( in_array( $column_name, $hidden ) ) {
 				$style = ' style="display:none;"';
 			}
@@ -260,7 +263,8 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 			switch ( $column_name ) {
 
-				case 'title': ?>
+				case 'title':
+					?>
 
 					<td <?php echo $attributes; ?>>
 
@@ -272,8 +276,9 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 						<div class="row-actions">
 
-						<?php // Add the actions below the title
-							$actions = array();
+						<?php
+						// Add the actions below the title
+							$actions         = array();
 							$actions['edit'] = '<a href="' . esc_url( get_edit_term_link( $row->term_id, $this->screen->taxonomy ) ) . '" title="' . esc_attr( __( 'Edit this item' ) ) . '">' . __( 'Edit' ) . '</a>';
 							$actions['view'] = '<a href="' . esc_url( $term_link ) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $row->name ) ) . '" rel="permalink">' . __( 'View' ) . '</a>';
 							echo $this->row_actions( $actions );
@@ -283,9 +288,11 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 					</td>
 
-				<?php break;
+					<?php
+					break;
 
-				case 'keyword': ?>
+				case 'keyword':
+					?>
 
 					<td <?php echo $attributes; ?>>
 
@@ -295,9 +302,11 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 					</td>
 
-				<?php break;
+					<?php
+					break;
 
-				case 'meta': ?>
+				case 'meta':
+					?>
 
 					<td <?php echo $attributes; ?>>
 
@@ -321,9 +330,11 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 					</td>
 
-				<?php break;
+					<?php
+					break;
 
-				case 'seo_notes': ?>
+				case 'seo_notes':
+					?>
 
 					<td <?php echo $attributes; ?>>
 
@@ -333,7 +344,8 @@ class SEO_Editor_Taxonomy_Editor extends WP_List_Table {
 
 					</td>
 
-				<?php break;
+					<?php
+					break;
 			}
 		}
 	}
